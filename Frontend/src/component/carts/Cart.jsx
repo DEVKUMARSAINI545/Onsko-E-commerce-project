@@ -319,6 +319,7 @@ export default function Cart() {
                         <dl className=' flex flex-col gap-2 md:gap-4 md:text-lg lg:text-xl lg:gap-8'>
                             <dt>₹{totalprice}</dt>
                             <dt >Free</dt>
+                            <dt >✅</dt>
                             {/* <dt className='underline'>Rajasthan,jaipur</dt> */}
                         </dl>
                     </div>
