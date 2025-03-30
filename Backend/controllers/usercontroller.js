@@ -444,7 +444,7 @@ const createCart = async (req, res) => {
 const removecart = async (req, res) => {
     try {
         // Find the cart for the user
-        let cart = await Cart.findOne({ user: req.user.id });
+        let cart = await Cart.findOne({ user: req.user });
         if (!cart) {
             return res.status(404).send("Cart is empty.");
         }

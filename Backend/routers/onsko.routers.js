@@ -18,6 +18,7 @@ router.route("/getuser").post(validationAdmin,getuser)
 router.route("/removeallcart").post(validationAdmin, removeallcart)
 router.route("/updaterating/:id").post(updateProductRating)
 router.route("/uploadReview/:id").post(validationAdmin,uploadReview)
+router.route("/removecart/:id").post(validationAdmin, removecart)
 
 
 //get request start from here
@@ -29,7 +30,6 @@ router.route("/getProductById/:id").get(validationAdmin,getProductById)
 router.route("/getblogs").get(validationAdmin,getblogs)
 router.route("/getcategory").get(validationAdmin,getcategory)
 router.route("/getcart").get(validationAdmin, getcart)
-router.route("/removecart/:id").get(validationAdmin, removecart)
 
 router.route("/create-checkout-session").post(validationAdmin,paypalpayment);
 // router.route("/create/order").post(validationAdmin, paypalpayment);

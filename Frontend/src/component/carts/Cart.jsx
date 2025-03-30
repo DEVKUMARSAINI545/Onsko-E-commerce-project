@@ -54,23 +54,14 @@ export default function Cart() {
     const removeItems = useCallback(async (id) => {
         try {
             setorderId(id)
-            // const token = JSON.parse(localStorage.getItem("token"))
-        
 
-                await axios.get(`/api/v1/onsko/removecart/${id}`, {
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                    },
-                })
+                await axios.post(`/api/v1/onsko/removecart/${id}`)
 
                 setTimeout(() => {
                     navigate(0)
 
                 }, 200)
-
-
-        
-                navigate("/sigin")
+ 
         
         } catch (error) {
             console.log(error.message)
@@ -211,7 +202,7 @@ export default function Cart() {
 
 
             </nav>
-
+        {/* navigation bar close here  */}
 
 
 
@@ -272,26 +263,23 @@ export default function Cart() {
                             {items.count === items.stock && <span className='text-xs text-red-600 my-2 ml-2'>No stock left</span>}
                             <div className="div w-full  h-10 flex justify-between items-center  md:h-14 px-2  lg:h-32">
                                 <div className='w-20 h-8 border-[1px] border-opacity-[0.3] flex justify-between px-2 items-center border-black lg:w-32 lg:h-12 lg:rounded-md lg:px-5'>
-                                    <button
-                                        onClick={() => {
-                                            if (items.count > 1) {
+                                 
+                                    <button onClick={() => {
 
-                                                handleDecrease(i)
+        // updateCount(i, item.count - 1);
+        removeItems(items?._id)
+        // console.log("count increase")
+
+        }} className='text-xl'>-</button>
+        <span>{items?.quantity}</span>
+        <button onClick={() => {
+        if (items?.quantity != items?.stock) {
 
 
-                                            }
-                                        }}
-                                        className='text-xl lg:text-3xl'>-</button>
-                                    <span className='lg:text-2xl'>{items?.count}</span>
-                                    <button
-                                        onClick={() => {
-                                            if (items.count < items.stock) {
+            updateCount(items?._id)
+        }
 
-                                                handleIncrease(i)
-                                            }
-                                        }}
-
-                                        className='text-xl lg:text-3xl'>+</button>
+}} className='text-xl'>+</button>
                                 </div>
 
                                 <span className='lg:text-2xl'>₹{items?.price * items?.quantity}</span>
@@ -303,7 +291,7 @@ export default function Cart() {
                     </div>
 
                 })}
-                <div className="div w-full border-b-[1px] border-opacity-[0.3] flex flex-col gap-2 justify-center  border-black h-24 md:h-32 lg:h-40 lg:gap-4 xl:hidden  ">
+                {/* <div className="div w-full border-b-[1px] border-opacity-[0.3] flex flex-col gap-2 justify-center  border-black h-24 md:h-32 lg:h-40 lg:gap-4 xl:hidden  ">
                     <div className="div w-full flex  justify-start items-center gap-3">
                         <img className='w-5 md:w-7 lg:w-10 lg:ml-5' src="https://img.icons8.com/?size=30&id=60661&format=png" alt="" />
                         <h1 className=' tracking-tighter md:text-lg cursor-pointer lg:text-2xl'>enter a  promo code</h1>
@@ -312,7 +300,7 @@ export default function Cart() {
                         <img className='w-5 md:w-7 lg:w-10 lg:ml-5' src="https://img.icons8.com/?size=30&id=59849&format=png" alt="" />
                         <h1 className=' tracking-tighter md:text-lg cursor-pointer lg:text-2xl'>add notes</h1>
                     </div>
-                </div>
+                </div> */}
 
 
 
@@ -346,7 +334,7 @@ export default function Cart() {
                         <span className='text-2xl lg:text-3xl lg:font-semibold'>₹{totalprice}</span>
                     </div>
 
-                    <button className='w-72 mx-auto  p-2 rounded-lg bg-[linear-gradient(10deg,red,orange)]  text-white md:w-[30rem] lg:w-[35rem] lg:p-3 lg:text-xl'>Buy</button>
+                    <button onClick={makePayment}  className='w-72 mx-auto  p-2 rounded-lg bg-[linear-gradient(10deg,red,orange)]  text-white md:w-[30rem] lg:w-[35rem] lg:p-3 lg:text-xl'>Buy</button>
                 </div>
                 <div className="div w-full  mt-1 h-5 flex justify-center items-center xl:hidden ">
                     <img className='w-4' src="https://img.icons8.com/?size=30&id=100837&format=png" alt="" />
