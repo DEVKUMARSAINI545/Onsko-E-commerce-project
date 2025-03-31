@@ -47,7 +47,7 @@ export default function Login() {
   
       try {
  
-          const response = await axios.post('/api/v1/onsko/login', {email,password});
+          const response = await axios.post('https://onsko-e-commerce-project.onrender.com/api/v1/onsko/login', {email,password});
   
           // Check backend status codes from the JSON response
           const { status, data } = response;
