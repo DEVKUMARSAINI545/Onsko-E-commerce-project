@@ -48,7 +48,7 @@ export default function Homes() {
 
 
     return (
-        <div className="flex flex-col justify-between lg:flex-none w-full 2xl:overflow-hidden h-[100vh] md:h-[60vh]  lg:h-[60vh] 2xl:h-[100vh] 2xl:p-0 bg-[#b03a19] bg-[url('/singlegirl.webp')] bg-cover bg-center md:bg-[url('/girls.webp')] md:bg-cover md:bg-center pt-5 rounded-2xl lg:rounded-none lg:p-0 lg:bg-transparent lg:bg-none transition-opacity duration-700 opacity-100">
+        <div className="flex flex-col justify-between lg:flex-none w-full 2xl:overflow-hidden h-[100vh] md:h-[60vh]  lg:h-[60vh] 2xl:h-[100vh] 2xl:p-0 bg-[#b03a19] bg-[url('https://ik.imagekit.io/mkjyuczro/singlegirl.webp?updatedAt=1743412545036')] bg-cover bg-center md:bg-[url('https://ik.imagekit.io/mkjyuczro/girls.webp?updatedAt=1743412545696')] md:bg-cover md:bg-center pt-5 rounded-2xl lg:rounded-none lg:p-0 lg:bg-transparent lg:bg-none transition-opacity duration-700 opacity-100">
             <Header userProfileImage={userProfileImage} />
 
             {/* Mobile View */}
