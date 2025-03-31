@@ -14,7 +14,7 @@ export default function Bottom() {
     const getSellerProduct =  async() => {
         setLoading(true); // Set loading to true before the request
         try {
-            const response = await axios.get('/api/v1/onsko/getAllproducts'); 
+            const response = await axios.get('https://onsko-e-commerce-project.onrender.com/api/v1/onsko/getAllproducts'); 
             if(response.data.success == true)
             {
 
