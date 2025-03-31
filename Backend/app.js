@@ -16,15 +16,14 @@ app.use(express.static(path.join(__dirname, "/Frontend/dist")));
 
 
 app.use(cors({
-    origin:"http://localhost:5173",
-    credentials:true,
-}));
+    origin: "*",
+    credentials: true,
+  }));
+  
 
 import userRouter from './routers/onsko.routers.js'
 
-app.get("/",(req,res)=>{
-    res.send("hello ")
-})
+ 
  
 app.use("/api/v1/onsko", userRouter)
 app.get("*",(_,res)=>{
