@@ -15,7 +15,7 @@ app.use(cookieparser())
 app.use(express.static(path.join(__dirname,"/Frontend/dist")))
 
 app.use(cors({
-    origin: "https://e-commerce-project-1-3om1.onrender.com",
+    origin: "https://onsko-e-commerce-project-f8msxovch-devlearner212s-projects.vercel.app/",
     credentials: true
 }));
 
