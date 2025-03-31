@@ -200,7 +200,7 @@ export default function ProductsBuy() {
                 </div>
                 <div className="div w-full lg:w-[50%] lg:p-5  2xl:gap-5   h-auto flex flex-col px-3 md:px-5 xl:gap-5     ">
                     <span className='font-semibold text-2xl md:text-4xl md:mb-2 xl:text-5xl 2xl:text-5xl'>{product?.name}</span>
-                    <span className='text-xl md:text-2xl my-2 2xl:text-3xl'>₹{product?.price} </span>
+                    <span className='text-xl md:text-2xl my-2 2xl:text-3xl'>${product?.price} </span>
 
 
                     <div className="flex space-x-2">
@@ -349,7 +349,7 @@ export default function ProductsBuy() {
                                         alt={items?.name}
                                     />
                                     <span className='text-xl font-semibold mt-2'>{items?.name}</span>
-                                    <span className='text-lg'><sup>₹</sup>{items?.price}</span>
+                                    <span className='text-lg'><sup>$</sup>{items?.price}</span>
                                 </div>
                             ))
                     }

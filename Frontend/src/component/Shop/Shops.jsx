@@ -172,7 +172,7 @@ export default function Shops() {
                             className='w-full h-[60vh] object-cover object-center rounded-md' src=
                             {items?.image} alt="" />
                         <span>{items?.name}</span>
-                        <span><sup>₹</sup>{items?.price}</span>
+                        <span><sup>$</sup>{items?.price}</span>
                     </div>
                 })}
              
@@ -276,7 +276,7 @@ export default function Shops() {
                                 className='w-full h-[60vh] md:h-[30vh] lg:h-[30vh] xl:h-[40vh] 2xl:h-[60vh]   object-cover object-center rounded-md' src=
                                 {items?.image} alt="" />
                             <span className='text-xl md:text-sm xl:text-xl'>{items?.name}</span>
-                            <span className='md:text-sm xl:text-xl'><sup>₹</sup>{items?.price}</span>
+                            <span className='md:text-sm xl:text-xl'><sup>$</sup>{items?.price}</span>
                         </motion.div>
                     })}
 

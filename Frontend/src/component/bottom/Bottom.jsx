@@ -63,7 +63,7 @@ export default function Bottom() {
                                 <div className="div absolute top-2 text-xs bg-[#c7dfff] p-1 left-2 text-black lg:top-5 lg:left-5">Best Seller</div>
                                 <img className='w-80  h-[85%] 2xl:h-96  object-cover object-center rounded-md' src={item?.image} alt="" />
                                 <span>{item?.name}</span>
-                                <span><sup>₹</sup>{item?.price}</span>
+                                <span><sup>$</sup>{item?.price}</span>
                             </motion.div>
                         ))}
                     </div>

@@ -257,7 +257,7 @@ export default function Cart() {
                             </div>
                             {/* middle box in right container */}
                             <div className="div pl-2 flex items-center w-full  h-8   lg:h-14 ">
-                                <span className='text-sm md:text-md lg:text-xl'>₹{items?.price}</span>
+                                <span className='text-sm md:text-md lg:text-xl'>${items?.price}</span>
                             </div>
                             {/* bottom box in right container */}
                             {items.count === items.stock && <span className='text-xs text-red-600 my-2 ml-2'>No stock left</span>}
@@ -282,7 +282,7 @@ export default function Cart() {
 }} className='text-xl'>+</button>
                                 </div>
 
-                                <span className='lg:text-2xl'>₹{items?.price * items?.quantity}</span>
+                                <span className='lg:text-2xl'>${items?.price * items?.quantity}</span>
 
                             </div>
                         </div>
@@ -317,7 +317,7 @@ export default function Cart() {
                     </div>
                     <div className="right w-[5rem]  flex flex-col justify-start pt-5 items-end md:">
                         <dl className=' flex flex-col gap-2 md:gap-4 md:text-lg lg:text-xl lg:gap-8'>
-                            <dt>₹{totalprice}</dt>
+                            <dt>${totalprice}</dt>
                             <dt >Free</dt>
                             <dt >✅</dt>
                             {/* <dt className='underline'>Rajasthan,jaipur</dt> */}
@@ -332,7 +332,7 @@ export default function Cart() {
                 <div className='w-full  flex flex-col justify-between pb-2 items-start h-32  xl:hidden '>
                     <div className=' w-full h-16 flex justify-between items-center lg:px-10 '>
                         <h1 className='text-xl md:text-3xl md:font-semibold md:tracking-wide'>Total</h1>
-                        <span className='text-2xl lg:text-3xl lg:font-semibold'>₹{totalprice}</span>
+                        <span className='text-2xl lg:text-3xl lg:font-semibold'>${totalprice}</span>
                     </div>
 
                     <button onClick={makePayment}  className='w-72 mx-auto  p-2 rounded-lg bg-[linear-gradient(10deg,red,orange)]  text-white md:w-[30rem] lg:w-[35rem] lg:p-3 lg:text-xl'>Buy</button>
@@ -373,7 +373,10 @@ export default function Cart() {
 
                     {products.length  === 0 &&
                         <>
-                            < div className='flex justify-center items-center mt-52 font-semibold text-xl'><h1>No items are added here yet.</h1></div>
+                           <div className="flex justify-center items-center mt-52">
+  <div className="w-10 h-10 border-4 border-gray-300 border-t-blue-500 rounded-full animate-spin"></div>
+</div>
+
                         </>
                     }
 
@@ -395,7 +398,7 @@ export default function Cart() {
                                     </h1>
                                 </div>
                                 <div className="div pl-2 flex items-center w-full h-8">
-                                    <span className='text-sm'>₹{item?.price}</span>
+                                    <span className='text-sm'>${item?.price}</span>
                                 </div>
 
                                 {item.quantity === item.stock && <span className='text-xs text-red-600 my-2 ml-2'>No stock left</span>}
@@ -420,7 +423,7 @@ export default function Cart() {
                                         }} className='text-xl'>+</button>
                                     </div>
 
-                                    <span className='text-lg'>₹{item?.price * item?.quantity}</span>
+                                    <span className='text-lg'>${item?.price * item?.quantity}</span>
                                 </div>
                             </div>
                         </div>
@@ -481,7 +484,7 @@ export default function Cart() {
                         <div className="mt-8 space-y-8">
                             <div className="flex justify-between ">
                                 <span>Subtotal</span>
-                                <span className='text-lg '>₹{totalprice ? totalprice : "0"}</span>
+                                <span className='text-lg '>${totalprice ? totalprice : "0"}</span>
                             </div>
                             <div className="flex justify-between">
                                 <span>Estimate Delivery</span>
@@ -491,7 +494,7 @@ export default function Cart() {
                         <div className="mt-4 pt-4 border-t border-gray-200">
                             <div className="flex justify-between font-semibold">
                                 <span>Total</span>
-                                <span className='text-lg '>₹{totalprice ? totalprice : "0"}</span>
+                                <span className='text-lg '>${totalprice ? totalprice : "0"}</span>
                             </div>
                         </div>
 
