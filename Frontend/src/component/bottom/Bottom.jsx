@@ -130,8 +130,8 @@ export default function Bottom() {
 
 
                     <div className="div w-60 p-5 bg-gray-300 hover:bg-orange-600 hover:text-white rounded-xl h-80 flex flex-col items-center justify-center gap-5 lg:w-[385.837px] lg:h-[536.65px] xl:w-[25rem]">
-                        <img className='w-[15rem] h-52 object-cover object-top rounded-lg md:h-72 md:object-cover lg:hidden' src="./public/big/womanFace.webp" alt="" />
-                        <img className='hidden w-[10rem] object-cover object-center lg:block lg:w-[20rem] lg:h-[26rem] lg:object-cover lg:rounded-xl xl:w-96' src='./public/big/womanFace.webp' alt="" />
+                        <img className='w-[15rem] h-52 object-cover object-top rounded-lg md:h-72 md:object-cover lg:hidden' src="/big/womanFace.webp" alt="" />
+                        <img className='hidden w-[10rem] object-cover object-center lg:block lg:w-[20rem] lg:h-[26rem] lg:object-cover lg:rounded-xl xl:w-96' src='/big/womanFace.webp' alt="" />
                         <button onClick={() => navigate("/shop", { state: { type: "face" } })} className='w-40 p-1 rounded-xl border-2 border-black text-5xl font-semibold tracking-tighter md:text-3xl lg:text-4xl lg:w-60'>Face</button>
                     </div>
                 </div>
