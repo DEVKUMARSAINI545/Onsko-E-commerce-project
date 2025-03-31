@@ -12,8 +12,12 @@ export default function Homes() {
  
     const getuser =async ( id) => {
         try {
-            const response = await axios.post(`https://onsko-e-commerce-project.onrender.com/api/v1/onsko/getuser`,{id});
-            const {profileImage} = response.data.user
+            const response = await axios.get(`https://onsko-e-commerce-project.onrender.com/api/v1/onsko/getuser`,{id});
+            console.log(response.data);
+            
+            // const {profileImage} = response.data.user
+            // console.log(profileImage);
+            
  
             if(response.data.success == true)
             {

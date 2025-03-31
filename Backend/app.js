@@ -15,7 +15,10 @@ app.use(cookieparser())
 app.use(express.static(path.join(__dirname, "/Frontend/dist")));
 
 
-app.use(cors());
+app.use(cors({
+    methods:"http://localhost:5173",
+    credentials:true,
+}));
 
 import userRouter from './routers/onsko.routers.js'
  
