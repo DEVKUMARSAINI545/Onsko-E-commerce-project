@@ -31,7 +31,7 @@ export default function Shops() {
     const getAllproducts = useCallback(async () => {
         try {
             setloading(true)
-            const response = await axios.get("/api/v1/onsko/getAllproducts")
+            const response = await axios.get("https://onsko-e-commerce-project.vercel.app/api/v1/onsko/getAllproducts")
 
             if(response.data)
             {
@@ -53,7 +53,7 @@ export default function Shops() {
         setActiveIndex(type)
 
         try {
-            const response = await axios.get(`/api/v1/onsko/getProducts/${type}`)
+            const response = await axios.get(`https://onsko-e-commerce-project.vercel.app//api/v1/onsko/getProducts/${type}`)
             // console.log(response.data?.body)
             if (type === "body") {
 

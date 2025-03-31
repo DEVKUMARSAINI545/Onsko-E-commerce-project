@@ -503,8 +503,8 @@ const getuser = async (req, res) => {
     try {
         // Verify the token and extract the email
    
-        const {id} = req.body;
-        const users = await user.findById(id)
+        const {email} = req.body;
+        const users = await user.findOne({email:email})
         if (!users) {
             res.json({ message: "users is not exist", success: false })
             return
