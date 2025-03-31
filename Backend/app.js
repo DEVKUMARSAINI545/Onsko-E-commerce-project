@@ -16,7 +16,7 @@ app.use(express.static(path.join(__dirname, "/Frontend/dist")));
 
 
 app.use(cors({
-    origin:"*",
+    origin:"https://onsko-e-commerce-project.onrender.com",
     credentials:true,
 }));
 
