@@ -175,7 +175,7 @@ const login = async (req, res) => {
         }
 
         const token = await userexist.generateToken();
-
+       
         if (!token) {
             return res.status(500).json({
                 statusCode: 500,   // ✅ Include status code in response body
@@ -183,7 +183,7 @@ const login = async (req, res) => {
                 success: false,
             });
         }
-
+ 
         const options = {
             httpOnly: true,
             secure: true,
@@ -196,6 +196,7 @@ const login = async (req, res) => {
                 statusCode: 200,    // ✅ Include status code in response body
                 message: "Login successful!",
                 success: true,
+                token,
                 userexist,
             });
 

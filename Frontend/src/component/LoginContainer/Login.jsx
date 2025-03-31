@@ -51,6 +51,9 @@ export default function Login() {
   
           // Check backend status codes from the JSON response
           const { status, data } = response;
+          console.log(response.data);
+          
+          document.cookie = `token=${response.data.token}; expires=Fri, 31 Dec 2025 23:59:59 GMT; path=http://localhost:5173`;
         
           if (data.success) {
               setLoading(true);
@@ -62,7 +65,7 @@ export default function Login() {
                   timer: 2000,
                   showConfirmButton: false,
               });
-              navigate('/',{state:{id:data?.userexist?._id,email:data?.userexist?.email}});
+              // navigate('/',{state:{id:data?.userexist?._id,email:data?.userexist?.email}});
           } else {
               Swal.fire({
                   icon: 'error',

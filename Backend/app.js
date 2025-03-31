@@ -12,18 +12,19 @@ dbconnection()
 app.use(express.json({ limit: "10mb" }))
 app.use(express.urlencoded({ extended: true, limit: "10mb" }))
 app.use(cookieparser())
-app.use(express.static(path.join(__dirname, "/Frontend/dist")));
-
-
 app.use(cors({
     origin:"*",
     credentials:true,
 }))
+app.use(express.static(path.join(__dirname, "/Frontend/dist")));
+
+
+
 
 import userRouter from './routers/onsko.routers.js'
 
  
- 
+
 app.use("/api/v1/onsko", userRouter)
 app.get("*",(_,res)=>{
     res.sendFile(path.resolve(__dirname,"Frontend","dist","index.html"))
