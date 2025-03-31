@@ -21,6 +21,10 @@ app.use(cors({
 }));
 
 import userRouter from './routers/onsko.routers.js'
+
+app.get("/",(req,res)=>{
+    res.send("hello ")
+})
  
 app.use("/api/v1/onsko", userRouter)
 app.get("*",(_,res)=>{
