@@ -16,7 +16,7 @@ app.use(express.static(path.join(__dirname, "/Frontend/dist")));
 
 
 app.use(cors({
-    methods:"http://localhost:5173",
+    origin:"http://localhost:5173",
     credentials:true,
 }));
 
