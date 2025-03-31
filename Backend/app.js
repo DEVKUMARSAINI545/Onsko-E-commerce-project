@@ -12,12 +12,10 @@ dbconnection()
 app.use(express.json({ limit: "10mb" }))
 app.use(express.urlencoded({ extended: true, limit: "10mb" }))
 app.use(cookieparser())
-app.use(express.static(path.join(__dirname,"/Frontend/dist")))
+app.use(express.static(path.join(__dirname, "/Frontend/dist")));
 
-app.use(cors({
-    origin: "https://onsko-e-commerce-project-f8msxovch-devlearner212s-projects.vercel.app/",
-    credentials: true
-}));
+
+app.use(cors());
 
 import userRouter from './routers/onsko.routers.js'
  
