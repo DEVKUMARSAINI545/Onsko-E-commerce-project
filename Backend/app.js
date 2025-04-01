@@ -37,9 +37,9 @@ app.use(express.static(path.join(__dirname, 'Frontend', 'dist')));
 app.use("/api/v1/onsko", userRouter);
 
 // Uncomment this if you want to serve index.html for all other routes
-// app.get("*", (_, res) => {
-//     res.sendFile(path.resolve(__dirname, 'Frontend', 'dist', 'index.html'));
-// });
+app.get("*", (_, res) => {
+    res.sendFile(path.resolve(__dirname, 'Frontend', 'dist', 'index.html'));
+});
 
 // Start the server
 const PORT = process.env.PORT || 3000;
