@@ -21,11 +21,13 @@ const __dirname = path.resolve();
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 app.use(cookieparser());
+
 const corsOptions = {
-  origin: 'onsko-e-commerce-project.vercel.app', // Allow your frontend's URL
-  
-  credentials: true, // Allow cookies to be sent with requests
-   
+  origin: [
+    "http://localhost:5173", // ✅ For local development
+    "https://onsko-e-commerce-project.vercel.app" // ✅ Your Vercel frontend
+  ],
+  credentials: true, // ✅ Allow cookies and authentication headers
 };
 
 app.use(cors(corsOptions));
