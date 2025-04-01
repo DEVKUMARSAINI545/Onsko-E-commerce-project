@@ -41,7 +41,7 @@ export default function Login() {
  
           const response = await axiosInstance.post('/login',{email,password})
           // Check backend status codes from the JSON response
-          console.log(response.data);
+        
           const { status, data } = response;
           
     

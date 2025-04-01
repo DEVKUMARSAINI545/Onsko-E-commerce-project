@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import axios from 'axios'
+import axiosInstance from '../axios';
 export default function Profile() {
     const navigate = useNavigate()
     const location = useLocation();
@@ -10,7 +11,7 @@ export default function Profile() {
  
     const removeAccount = async () => {
         try {
-            const response = await axios.post("/api/v1/onsko/logout");
+            const response = await axiosInstance.post("/logout");
     
             if (response.status === 200 && response.data?.success) {
                 // Clear local storage

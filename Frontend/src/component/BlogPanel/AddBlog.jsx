@@ -3,6 +3,7 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 import { ArrowBigDown, ArrowDown } from 'lucide-react';
 import Header from '../Headers/Header';
+import axiosInstance from '../../axios';
 export default function AddBlogs() {
     const navigate = useNavigate()
     const [imageSrc, setImageSrc] = useState("/public/Big/itemsIcons.png");
@@ -20,7 +21,9 @@ export default function AddBlogs() {
                 formData.append('ImageFile', ImageFile);
             }
 
-            const response = await axios.post("/api/v1/onsko/blogs", formData)
+            const response = await axiosInstance.post("/blogs", formData,{headers: {
+                'Content-Type': 'multipart/form-data', // Set the content type to multipart/form-data
+              }})
             if (response.data?.success == true) {
                 navigate("/blog")
             }

@@ -45,7 +45,9 @@ export default function SignIn() {
           formData.append('password', password);
           formData.append('profileImage', profileImage);
   
-          const response = await axiosInstance.post('/signin',formData);
+          const response = await axiosInstance.post('/signin',formData,{ headers: {
+            'Content-Type': 'multipart/form-data', // Set the content type to multipart/form-data
+          },});
   
           // Check backend status codes from the JSON response
           const { status, data } = response;

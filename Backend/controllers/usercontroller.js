@@ -230,6 +230,7 @@ const logout = async (req, res) => {
 const blogspost = async (req, res) => {
     try {
         const { headlines, bio } = req.body
+    
 
 
         const requirebody = z.object({
