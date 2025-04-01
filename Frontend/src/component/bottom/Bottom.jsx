@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Homes from '../Home/Homes';
 import LastFile from '../wrong/LastFile';
 import { motion } from 'framer-motion';
+import axiosInstance from '../../axios';
 // import api from '../../axios';
 
 export default function Bottom() {
@@ -14,7 +15,7 @@ export default function Bottom() {
     const getSellerProduct =  async() => {
         setLoading(true); // Set loading to true before the request
         try {
-            const response = await axios.get('https://onsko-e-commerce-project.onrender.com/api/v1/onsko/getAllproducts'); 
+            const response = await axiosInstance.get('/getAllproducts'); 
             if(response.data.success == true)
             {
 

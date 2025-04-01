@@ -3,6 +3,7 @@ import Header from '../Headers/Header';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { motion } from 'framer-motion';
+import axiosInstance from '../../axios';
 
 export default function Homes() {
     const navigate = useNavigate();
@@ -10,26 +11,23 @@ export default function Homes() {
     const [userProfileImage, setProfileImage] = useState(null);
     const {state} = useLocation()
  
-    const getuser =async ( id) => {
+ 
+    const getUser = async (email) => {
         try {
-            const response = await axios.get(`https://onsko-e-commerce-project.onrender.com/api/v1/onsko/getuser`,{id});
-            console.log(response.data);
-            
-            // const {profileImage} = response.data.user
-            // console.log(profileImage);
-            
  
-            if(response.data.success == true)
-            {
-        
-                setProfileImage(profileImage);
- 
-            }
+            
+          const response = await axiosInstance.get("/getuser", {params:{email}})
+           
+      
+         
+      
+          if (response.data.success === true) {
+            setProfileImage(response.data.user.profileImage);
+          }
         } catch (error) {
-            console.log(error.message);
+          console.log("Error fetching user:", error.message);
         }
-    };
-
+      };
 
 
     useEffect(() => {
@@ -40,8 +38,9 @@ export default function Homes() {
           } 
           const userData =  localStorage.getItem("UserData")
           if (userData) {
-            const { id } = JSON.parse(userData);
-            getuser(id);
+            const { email } = JSON.parse(userData);
+    
+            getUser(email)
           } else{
             navigate("/login")
           }

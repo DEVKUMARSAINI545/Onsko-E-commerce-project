@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion'
 import axios from 'axios'
 import { useParams } from 'react-router-dom';
+import axiosInstance from '../../axios';
 export default function Shops() {
     const navigate = useNavigate()
     const location = useLocation();
@@ -31,7 +32,7 @@ export default function Shops() {
     const getAllproducts = useCallback(async () => {
         try {
             setloading(true)
-            const response = await axios.get("https://onsko-e-commerce-project.onrender.com/api/v1/onsko/getAllproducts")
+            const response = await axiosInstance.get("/getAllproducts")
 
             if(response.data)
             {
@@ -53,7 +54,7 @@ export default function Shops() {
         setActiveIndex(type)
 
         try {
-            const response = await axios.get(`https://onsko-e-commerce-project.onrender.com/api/v1/onsko/getProducts/${type}`)
+            const response = await axiosInstance.get(`/getProducts/${type}`)
             // console.log(response.data?.body)
             if (type === "body") {
 

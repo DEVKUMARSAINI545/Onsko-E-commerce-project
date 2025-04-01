@@ -187,6 +187,8 @@ const login = async (req, res) => {
         const options = {
             httpOnly: true,
             secure: true,
+            sameSite: 'None', // Allow the cookie to be sent cross-origin
+            
         };
 
         return res
@@ -196,7 +198,6 @@ const login = async (req, res) => {
                 statusCode: 200,    // ✅ Include status code in response body
                 message: "Login successful!",
                 success: true,
-                token,
                 userexist,
             });
 
@@ -377,6 +378,8 @@ const getProductById = async (req, res) => {
 const getcart = async (req, res) => {
     try {
         const users = await Cart.findOne({user:req.user}).populate('products.product')
+        console.log(users);
+        
         if(!users)
         {
           return res.status(404).json({message:"Can't find the cart data",success:false})
@@ -503,9 +506,11 @@ const getuser = async (req, res) => {
  
     try {
         // Verify the token and extract the email
-   
-        const {email} = req.body;
-        const users = await user.findOne({email:email})
+           
+        const {email} = req.query;
+        console.log(email);
+        
+        const users = await user.findOne({email})
         if (!users) {
             res.json({ message: "users is not exist", success: false })
             return

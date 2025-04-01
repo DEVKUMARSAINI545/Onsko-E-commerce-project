@@ -3,6 +3,7 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 import e from 'cors';
 import Swal from 'sweetalert2';
+import axiosInstance from '../../axios';
 
 
 export default function Login() {
@@ -14,15 +15,6 @@ export default function Login() {
     const [passwordError, setPasswordError] = useState(false);
 
     const navigate = useNavigate()
-    const storeToken = (token) => {
-        const now = new Date().getTime(); // Current time
-        const expirationTime = now + 24 * 60 * 60 * 1000; // 1 day expiration
-
-        // Store token and expiration time in localStorage
-        localStorage.setItem('token', JSON.stringify(token));
-        localStorage.setItem('tokenExpiration', expirationTime.toString());
-    };
-
     
     const userLogin = async (e) => {
      
@@ -47,17 +39,16 @@ export default function Login() {
   
       try {
  
-          const response = await axios.post('https://onsko-e-commerce-project.onrender.com/api/v1/onsko/login', {email,password});
-  
+          const response = await axiosInstance.post('/login',{email,password})
           // Check backend status codes from the JSON response
-          const { status, data } = response;
           console.log(response.data);
+          const { status, data } = response;
           
-          document.cookie = `token=${response.data.token}; expires=Fri, 31 Dec 2025 23:59:59 GMT; path=http://localhost:5173`;
+    
         
           if (data.success) {
               setLoading(true);
-              storeToken(data.token)
+           
               Swal.fire({
                   icon: 'success',
                   title: 'Account Created!',
@@ -65,7 +56,7 @@ export default function Login() {
                   timer: 2000,
                   showConfirmButton: false,
               });
-              // navigate('/',{state:{id:data?.userexist?._id,email:data?.userexist?.email}});
+              navigate('/',{state:{id:data?.userexist?._id,email:data?.userexist?.email}});
           } else {
               Swal.fire({
                   icon: 'error',

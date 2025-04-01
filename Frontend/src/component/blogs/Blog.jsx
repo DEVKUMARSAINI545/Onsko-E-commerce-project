@@ -3,13 +3,14 @@ import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { formatDistanceToNow } from 'date-fns';
 import { motion } from 'framer-motion';
+import axiosInstance from '../../axios';
 export default function Blog() {
     const [changeX, setchangeX] = useState(false)
     const [postdata, setpostdata] = useState([])
     const navigate = useNavigate()
     const getblogposts = useCallback(async () => {
         try {
-            const response = await axios.get('/api/v1/onsko/getblogs')
+            const response = await axiosInstance.get('/getblogs')
             setpostdata([...response.data])
         } catch (error) {
             console.log(error.message);

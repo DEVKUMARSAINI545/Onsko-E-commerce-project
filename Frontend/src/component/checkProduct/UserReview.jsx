@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios'
 import { useNavigate, useParams } from 'react-router';
+import axiosInstance from '../../axios';
 export default function UserReview() {
     const [review, setReview] = useState('');
     const [rating, setRating] = useState(0); // Rating (1 to 5 stars)
@@ -23,7 +24,7 @@ export default function UserReview() {
         }
 
         try {
-            const response = await axios.post(`/api/v1/onsko/uploadReview/${id}`, { review })    
+            const response = await axiosInstance.post(`/uploadReview/${id}`, { review })    
             if (response.data.success == true) {
                 setReview();
                 getReview()
@@ -39,7 +40,7 @@ export default function UserReview() {
 
     const getReview = async()=>{
         try {
-            const response = await axios.get(`/api/v1/onsko/getUserReview/${id}`)
+            const response = await axiosInstance.get(`/getUserReview/${id}`)
             if(response.data.success == true)
                 {
                 setUserDetail(response.data?.data)

@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { loadStripe } from '@stripe/stripe-js'
+import axiosInstance from '../../axios'
 export default function Cart() {
 
     const [changeX, setchangeX] = useState(false)
@@ -18,7 +19,8 @@ export default function Cart() {
         try {
  
         
-            const response = await axios.get("/api/v1/onsko/getcart")
+            const response = await axiosInstance.get("/getcart",)
+      
              
             setproduct(response?.data?.cart)
             setorderId(response?.data?.cart?._id)
@@ -29,7 +31,7 @@ export default function Cart() {
         } catch (error) {
            console.log(error.message);
            
-            // console.log("hi")
+           
         }
     }, [])
 
@@ -37,7 +39,7 @@ export default function Cart() {
     const updateCount = useCallback(async (id) => {
         try {
  
-              const ans =   await axios.post(`/api/v1/onsko/cart/${id}`)
+              const ans =   await axiosInstance.post(`/cart/${id}`)
               console.log(ans.data);
               
     
@@ -55,7 +57,7 @@ export default function Cart() {
         try {
             setorderId(id)
 
-                await axios.post(`/api/v1/onsko/removecart/${id}`)
+                await axiosInstance.post(`/removecart/${id}`)
 
                 setTimeout(() => {
                     navigate(0)
@@ -74,18 +76,20 @@ export default function Cart() {
         getcart()
 
 
-    }, [getcart])
+    }, [ ])
 
     const removeCart = async () => {
         // const token = JSON.parse(localStorage.getItem("token"));
 
         try {
-            const response = await axios.post("/api/v1/onsko/removeallcart");
+            const response = await axiosInstance.post("/removeallcart",);
             console.log(response.data);
             if (response?.data?.success == true) {
                 setproduct([])
+                setorderId()
+            setTotalprice()
 
-                // navigate("/shop")
+                navigate("/shop")
                 // navigate(0)
             }
 
@@ -137,9 +141,7 @@ export default function Cart() {
             "Content-Type": "application/json"
         }
 
-        const response = await axios.post(`/api/v1/onsko/create-checkout-session`, { products }, {
-            headers: headers,
-        })
+        const response = await axiosInstance.post(`/create-checkout-session`,{ products })
 
         const result = stripe.redirectToCheckout({ sessionId: response.data.id })
         

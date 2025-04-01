@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
 import LoadingAnimation from '../Loading/LoadingAnimation';
 import UserReview from './UserReview';
+import axiosInstance from '../../axios';
 
 
 export default function ProductsBuy() {
@@ -29,7 +30,7 @@ export default function ProductsBuy() {
     const handleRating = async (newRating) => {
         setRating(newRating);
         try {
-            const response = await axios.post(`/api/v1/onsko/updaterating/${id}`, { rating: newRating })
+            const response = await axiosInstance.post(`/updaterating/${id}`,{ rating: newRating })
             if (response.data.sucess == true) {
                 alert("done rating..")
             }
@@ -50,8 +51,9 @@ export default function ProductsBuy() {
 
     const getproduct = async () => {
         try {
-            const response = await axios.get(`/api/v1/onsko/getProductById/${id}`)
-
+            const response = await axiosInstance.get(`/getProductById/${id}`)
+         
+            
 
             setproduct(response.data)
 
@@ -66,8 +68,8 @@ export default function ProductsBuy() {
 
 
         try {
-            const response = await axios.get(`/api/v1/onsko/getProducts/${type}`)
-            // console.log(response.data?.body)
+            const response = await axiosInstance.get(`/getProducts/${type}`)
+             
             if (type === "body") {
 
                 setallproduct(response.data?.body)
@@ -116,8 +118,9 @@ export default function ProductsBuy() {
         // dispatch(addProduct(product))
 
         try {
-            const response = await axios.post(
-                `/api/v1/onsko/cart/${id}`);
+            const response = await axiosInstance.post(`/cart/${id}`);
+                console.log(response.data);
+                
             if (response?.data?.success === true) {
 
                 navigate("/cart")

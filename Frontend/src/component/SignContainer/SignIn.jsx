@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 import Swal from 'sweetalert2';
 import axios from 'axios'
 import { useNavigate } from 'react-router';
+import axiosInstance from '../../axios';
 export default function SignIn() {
     const [email, setemail] = useState(null)
     const [loading,setloading] = useState(false)
@@ -44,9 +45,7 @@ export default function SignIn() {
           formData.append('password', password);
           formData.append('profileImage', profileImage);
   
-          const response = await axios.post('/api/v1/onsko/signin', formData, {
-              headers: { 'Content-Type': 'multipart/form-data' }
-          });
+          const response = await axiosInstance.post('/signin',formData);
   
           // Check backend status codes from the JSON response
           const { status, data } = response;
