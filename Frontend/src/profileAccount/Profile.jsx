@@ -8,7 +8,7 @@ export default function Profile() {
     const navigate = useNavigate()
     const location = useLocation();
     // const {userProfileImage} = location.state?.value; // Safely access the state value
-    const {userProfileImage,Userdetail} = location.state
+    const {userProfileImage,Userdetail} = location.state?.value
     console.log(Userdetail);
     
     // console.log(userProfileImage);

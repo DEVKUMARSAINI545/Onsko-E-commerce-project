@@ -120,7 +120,7 @@ export default function Homes() {
                             </div>
                         </Link>
                     ) : (
-                        <img onClick={() => navigate("/profile", { state: { value: userProfileImage,Userdetail:Userdetail } })} className="w-6 2xl:w-10 2xl:h-10 2xl:object-cover h-6 rounded-full" src={userProfileImage} alt="Profile Icon" />
+                        <img onClick={() => navigate("/profile", { state: { value: {userProfileImage,Userdetail} } })} className="w-6 2xl:w-10 2xl:h-10 2xl:object-cover h-6 rounded-full" src={userProfileImage} alt="Profile Icon" />
                     )}
                 </nav>
 
