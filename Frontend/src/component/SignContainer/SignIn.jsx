@@ -94,6 +94,7 @@ export default function SignIn() {
   
   const HandleSignIn = async (e, fullname, email, password, profileImage, setloading) => {
     e.preventDefault();
+   
 
     // ✅ Validation: Full Name (Minimum 3 Characters)
     if (!fullname || fullname.trim().length < 3) {
@@ -137,14 +138,6 @@ export default function SignIn() {
     // ✅ Prevent Multiple Submissions
     setloading(true);
 
-    // ✅ Show Loading Alert
-    Swal.fire({
-        title: "Signing up...",
-        imageUrl: "/loadingIcons.gif",
-        timer: 2000,
-        showConfirmButton: false,
-    });
-
     try {
         // ✅ Create FormData for File Upload
         const formData = new FormData();
@@ -163,12 +156,13 @@ export default function SignIn() {
             Swal.fire({
                 icon: "success",
                 title: "Account Created!",
-                text: data.message || "You have successfully signed up. Redirecting to login...",
-                timer: 100,
+                text: "Redirecting to login...",
+                timer: 3000,
                 showConfirmButton: false,
             });
-            navigate("/login")
-             
+
+            // ✅ Navigate to login instantly without delay
+            navigate("/login");
         } else {
             throw new Error(data.message || "Signup failed");
         }
