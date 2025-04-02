@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import Header from '../Headers/Header';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { Link,  useNavigate } from 'react-router-dom';
+ 
 import { motion } from 'framer-motion';
 import axiosInstance from '../../axios';
 
@@ -9,7 +9,6 @@ export default function Homes() {
     const navigate = useNavigate();
     const [changeX, setchangeX] = useState(false);
     const [userProfileImage, setProfileImage] = useState(null);
-    const {state} = useLocation()
  
  
     const getUser = async (email) => {
@@ -37,13 +36,7 @@ export default function Homes() {
       };
 
 
-    useEffect(() => {
-       
-        // Retrieve the token and expiration time from localStorage
-        if (state) {
-            localStorage.setItem("UserData", JSON.stringify(state));
-          } 
-          
+    useEffect(() => {     
           const userData =  localStorage.getItem("UserData")
           if (userData) {
             const { email } = JSON.parse(userData);

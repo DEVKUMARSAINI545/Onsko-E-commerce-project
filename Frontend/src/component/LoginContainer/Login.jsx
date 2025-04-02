@@ -56,7 +56,8 @@ export default function Login() {
                   timer: 2000,
                   showConfirmButton: false,
               });
-              navigate('/',{state:{id:data?.userexist?._id,email:data?.userexist?.email,name:data?.userexist?.fullname,profileImage:data?.userexist?.profileImage}});
+              localStorage.setItem("UserData",JSON.stringify({id:data?.userexist?._id,email:data?.userexist?.email,name:data?.userexist?.fullname,profileImage:data?.userexist?.profileImage}))
+              navigate('/');
           } else {
               Swal.fire({
                   icon: 'error',
