@@ -96,7 +96,7 @@ export default function Profile() {
             <div>
                 <div className="div w-full h-60 flex flex-col items-center gap-2 ">
 
-                    <img className='mx-auto object-cover mb-2 w-32 h-32 rounded-full' src={userProfileImage} alt="" />
+                    <img className='mx-auto object-cover mb-2 w-32 h-32 rounded-full' src={""} alt="" />
                     <h1 className='text-center text-xl font-semibold'>{""}</h1>
                     <p className='text-center text-xs tracking-tighter font-medium'>{""}</p>
                     <button
