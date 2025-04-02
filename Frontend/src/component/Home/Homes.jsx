@@ -24,8 +24,14 @@ export default function Homes() {
           if (response.data.success === true) {
             setProfileImage(response.data.user.profileImage);
           }
+          else{
+            navigate("/login")
+          }
+          
         } catch (error) {
           console.log("Error fetching user:", error.message);
+          navigate("/login"); // Redirect to login on error
+        
         }
       };
 
@@ -36,9 +42,7 @@ export default function Homes() {
         if (state) {
             localStorage.setItem("UserData", JSON.stringify(state));
           } 
-          else{
-            navigate("/login")
-          }
+          
           const userData =  localStorage.getItem("UserData")
           if (userData) {
             const { email } = JSON.parse(userData);
