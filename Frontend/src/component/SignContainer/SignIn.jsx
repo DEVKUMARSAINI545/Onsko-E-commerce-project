@@ -247,7 +247,7 @@ export default function SignIn() {
                     type="file" 
                     accept="image/*" 
                   />
-                  <button onClick={()=> HandleSignIn(e, fullname, email, password, profileImage, setloading)} className="mt-5 tracking-wide font-semibold bg-indigo-500 text-gray-100 w-full py-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:outline-none focus:shadow-outline">
+                  <button onClick={(e)=> HandleSignIn(e, fullname, email, password, profileImage, setloading)} className="mt-5 tracking-wide font-semibold bg-indigo-500 text-gray-100 w-full py-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:outline-none focus:shadow-outline">
                     <span className="ml-3">Sign Up</span>
                   </button>
                   <p className="mt-6 text-xs text-gray-600 text-center">
