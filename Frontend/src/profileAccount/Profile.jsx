@@ -7,7 +7,12 @@ import axiosInstance from '../axios';
 export default function Profile() {
     const navigate = useNavigate()
     const location = useLocation();
-    const userProfileImage = location.state?.value; // Safely access the state value
+    const {userProfileImage} = location.state?.value; // Safely access the state value
+    console.log(userProfileImage);
+    const UserData = JSON.parse(localStorage.getItem("UserData"))
+    console.log(UserData);
+    
+    
  
     const removeAccount = async () => {
         try {
@@ -89,7 +94,7 @@ export default function Profile() {
                 <div className="div w-full h-60 flex flex-col items-center gap-2 ">
 
                     <img className='mx-auto object-cover mb-2 w-32 h-32 rounded-full' src={userProfileImage} alt="" />
-                    <h1 className='text-center text-xl font-semibold'>Dev Kumar saini</h1>
+                    <h1 className='text-center text-xl font-semibold'>{UserData?.name}</h1>
                     <p className='text-center text-xs tracking-tighter font-medium'> devsaini27806@gmail.com</p>
                     <button
                         onClick={removeAccount}
