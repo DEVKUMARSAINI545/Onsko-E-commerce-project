@@ -18,81 +18,171 @@ export default function SignIn() {
         }
     };
 
-    const HandleSignIn = async (e) => {
-      e.preventDefault();
+  //   const HandleSignIn = async (e) => {
+  //     e.preventDefault();
   
-      if (!fullname || !email || !password || !profileImage) {
-          return Swal.fire({
-              icon: 'warning',
-              title: 'Missing Fields',
-              text: 'Please fill out all fields, including uploading a profile image!',
-          });
-      }
+  //     if (!fullname || !email || !password || !profileImage) {
+  //         return Swal.fire({
+  //             icon: 'warning',
+  //             title: 'Missing Fields',
+  //             text: 'Please fill out all fields, including uploading a profile image!',
+  //         });
+  //     }
   
-      if (!loading) {
-          Swal.fire({
-              title: 'It takes a few seconds...',
-              imageUrl: '/loadingIcons.gif',
-              timer: 2000,
-              showConfirmButton: false,
-          });
-      }
+  //     if (!loading) {
+  //         Swal.fire({
+  //             title: 'It takes a few seconds...',
+  //             imageUrl: '/loadingIcons.gif',
+  //             timer: 2000,
+  //             showConfirmButton: false,
+  //         });
+  //     }
   
-      try {
-          const formData = new FormData();
-          formData.append('fullname', fullname);
-          formData.append('email', email);
-          formData.append('password', password);
-          formData.append('profileImage', profileImage);
+  //     try {
+  //         const formData = new FormData();
+  //         formData.append('fullname', fullname);
+  //         formData.append('email', email);
+  //         formData.append('password', password);
+  //         formData.append('profileImage', profileImage);
   
-          const response = await axiosInstance.post('/signin',formData,{ headers: {
-            'Content-Type': 'multipart/form-data', // Set the content type to multipart/form-data
-          },});
+  //         const response = await axiosInstance.post('/signin',formData,{ headers: {
+  //           'Content-Type': 'multipart/form-data', // Set the content type to multipart/form-data
+  //         },});
   
-          // Check backend status codes from the JSON response
-          const { status, data } = response;
+  //         // Check backend status codes from the JSON response
+  //         const { status, data } = response;
   
-          if (data.success) {
-              setloading(true);
-              Swal.fire({
-                  icon: 'success',
-                  title: 'Account Created!',
-                  text: data.message || 'You have successfully signed up. Redirecting to login...',
-                  timer: 100,
-                  showConfirmButton: false,
-              });
-              navigate('/login');
-          } else {
-              Swal.fire({
-                  icon: 'error',
-                  title: 'Failed',
-                  text: data.message || 'Something went wrong. Please try again.',
-              });
-          }
+  //         if (data.success) {
+  //             setloading(true);
+  //             Swal.fire({
+  //                 icon: 'success',
+  //                 title: 'Account Created!',
+  //                 text: data.message || 'You have successfully signed up. Redirecting to login...',
+  //                 timer: 100,
+  //                 showConfirmButton: false,
+  //             });
+  //             navigate('/login');
+  //         } else {
+  //             Swal.fire({
+  //                 icon: 'error',
+  //                 title: 'Failed',
+  //                 text: data.message || 'Something went wrong. Please try again.',
+  //             });
+  //         }
   
-      } catch (error) {
-          console.error('Sign-in error:', error);
+  //     } catch (error) {
+  //         console.error('Sign-in error:', error);
   
-          if (error.response) {
-              const { status, data } = error.response;
+  //         if (error.response) {
+  //             const { status, data } = error.response;
   
-              Swal.fire({
-                  icon: status >= 400 && status < 500 ? 'warning' : 'error',
-                  title: `Error ${status}`,
-                  text: data?.message || 'Something went wrong. Please try again later.',
-              });
+  //             Swal.fire({
+  //                 icon: status >= 400 && status < 500 ? 'warning' : 'error',
+  //                 title: `Error ${status}`,
+  //                 text: data?.message || 'Something went wrong. Please try again later.',
+  //             });
   
-          } else {
-              Swal.fire({
-                  icon: 'error',
-                  title: 'Network Error',
-                  text: 'Please check your internet connection and try again.',
-              });
-          }
-      }
-  };
+  //         } else {
+  //             Swal.fire({
+  //                 icon: 'error',
+  //                 title: 'Network Error',
+  //                 text: 'Please check your internet connection and try again.',
+  //             });
+  //         }
+  //     }
+  // };
   
-    
+  const HandleSignIn = async (e, fullname, email, password, profileImage, setloading) => {
+    e.preventDefault();
+
+    // ✅ Validation: Full Name (Minimum 3 Characters)
+    if (!fullname || fullname.trim().length < 3) {
+        return Swal.fire({
+            icon: "warning",
+            title: "Invalid Full Name",
+            text: "Full name must be at least 3 characters long.",
+        });
+    }
+
+    // ✅ Validation: Email (Valid Format)
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!email || !emailRegex.test(email)) {
+        return Swal.fire({
+            icon: "warning",
+            title: "Invalid Email",
+            text: "Please enter a valid email address.",
+        });
+    }
+
+    // ✅ Validation: Password (Minimum 8 Characters, 1 Uppercase, 1 Lowercase, 1 Number, 1 Special Character)
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    if (!password || !passwordRegex.test(password)) {
+        return Swal.fire({
+            icon: "warning",
+            title: "Weak Password",
+            text: "Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character.",
+        });
+    }
+
+    // ✅ Validation: Profile Image (Must be JPG, PNG, or GIF)
+    const allowedImageTypes = ["image/jpeg", "image/png", "image/gif"];
+    if (!profileImage || !allowedImageTypes.includes(profileImage.type)) {
+        return Swal.fire({
+            icon: "warning",
+            title: "Invalid Profile Image",
+            text: "Please upload a valid image file (JPG, PNG, GIF).",
+        });
+    }
+
+    // ✅ Prevent Multiple Submissions
+    setloading(true);
+
+    // ✅ Show Loading Alert
+    Swal.fire({
+        title: "Signing up...",
+        imageUrl: "/loadingIcons.gif",
+        timer: 2000,
+        showConfirmButton: false,
+    });
+
+    try {
+        // ✅ Create FormData for File Upload
+        const formData = new FormData();
+        formData.append("fullname", fullname);
+        formData.append("email", email);
+        formData.append("password", password);
+        formData.append("profileImage", profileImage);
+
+        const response = await axiosInstance.post("/signin", formData, {
+            headers: { "Content-Type": "multipart/form-data" },
+        });
+
+        const { data } = response;
+
+        if (data.success) {
+            Swal.fire({
+                icon: "success",
+                title: "Account Created!",
+                text: data.message || "You have successfully signed up. Redirecting to login...",
+                timer: 2000,
+                showConfirmButton: false,
+            });
+            setTimeout(() => navigate("/login"), 1000);
+        } else {
+            throw new Error(data.message || "Signup failed");
+        }
+    } catch (error) {
+        console.error("Sign-in error:", error);
+
+        Swal.fire({
+            icon: "error",
+            title: "Signup Failed",
+            text: error.response?.data?.message || "Something went wrong. Please try again later.",
+        });
+    } finally {
+        setLoading(false);
+    }
+};  
     return (
 
         
@@ -157,7 +247,7 @@ export default function SignIn() {
                     type="file" 
                     accept="image/*" 
                   />
-                  <button onClick={HandleSignIn} className="mt-5 tracking-wide font-semibold bg-indigo-500 text-gray-100 w-full py-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:outline-none focus:shadow-outline">
+                  <button onClick={()=> HandleSignIn(e, fullname, email, password, profileImage, setloading)} className="mt-5 tracking-wide font-semibold bg-indigo-500 text-gray-100 w-full py-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:outline-none focus:shadow-outline">
                     <span className="ml-3">Sign Up</span>
                   </button>
                   <p className="mt-6 text-xs text-gray-600 text-center">
