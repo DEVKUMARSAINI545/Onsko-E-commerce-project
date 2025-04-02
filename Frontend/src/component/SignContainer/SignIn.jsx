@@ -116,7 +116,7 @@ export default function SignIn() {
     }
 
     // ✅ Validation: Password (Minimum 8 Characters, 1 Uppercase, 1 Lowercase, 1 Number, 1 Special Character)
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    const passwordRegex = /^.{8,}$/;
     if (!password || !passwordRegex.test(password)) {
         return Swal.fire({
             icon: "warning",
