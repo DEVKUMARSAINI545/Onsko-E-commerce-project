@@ -43,6 +43,9 @@ export default function Homes() {
     
             getUser(email)
           } 
+          else{
+            navigate("/login")
+          }
  
     }, []);
 
