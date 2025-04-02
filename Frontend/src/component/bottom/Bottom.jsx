@@ -119,19 +119,19 @@ export default function Bottom() {
 
                     {/* Category Cards */}
                     <div className="div w-60 p-5 bg-gray-300 hover:bg-purple-500 hover:text-white rounded-xl h-80 flex flex-col items-center justify-center gap-5 lg:w-[385.837px] lg:h-[536.65px] xl:w-[25rem]">
-                        <img className='w-[15rem] h-52 object-cover rounded-lg md:h-72 md:object-cover lg:hidden' src="/big/womanHair.webp" alt="" />
+                        <img className='w-[15rem] h-52 object-cover rounded-lg md:h-72 md:object-cover lg:hidden' src="https://ik.imagekit.io/mkjyuczro/Big/womanHair.webp?updatedAt=1743412601970" alt="" />
                         <img className='hidden w-[10rem] lg:block lg:w-[20rem] lg:h-[26rem] lg:object-cover lg:rounded-xl xl:w-96' src='https://ik.imagekit.io/mkjyuczro/Big/womanHair.webp?updatedAt=1743412601970' alt="" />
                         <button onClick={() => navigate("/shop", { state: { type: "hair" } })} className='w-40 p-1 rounded-xl border-2 border-black text-5xl font-semibold tracking-tighter md:text-3xl lg:text-4xl lg:w-60'>Hair</button>
                     </div>
                     <div className="div w-60 p-5 bg-gray-300 hover:bg-green-500 hover:text-white rounded-xl h-80 flex flex-col items-center justify-center gap-5 lg:w-[385.837px] lg:h-[536.65px] xl:w-[25rem]">
-                        <img className='w-[15rem] h-52 object-cover object-center rounded-lg md:h-72 md:object-cover lg:hidden' src="/big/boyBody.webp" alt="" />
+                        <img className='w-[15rem] h-52 object-cover object-center rounded-lg md:h-72 md:object-cover lg:hidden' src="https://ik.imagekit.io/mkjyuczro/Big/boyBody.webp?updatedAt=1743412600964" alt="" />
                         <img className='hidden w-[10rem] lg:block lg:w-[20rem] lg:h-[26rem] lg:object-cover lg:rounded-xl xl:w-96' src='https://ik.imagekit.io/mkjyuczro/Big/boyBody.webp?updatedAt=1743412600964' alt="" />
                         <button onClick={() => navigate("/shop", { state: { type: "body" } })} className='w-40 p-1 rounded-xl border-2 border-black text-5xl font-semibold tracking-tighter md:text-3xl lg:text-4xl lg:w-60'>Body</button>
                     </div>
 
 
                     <div className="div w-60 p-5 bg-gray-300 hover:bg-orange-600 hover:text-white rounded-xl h-80 flex flex-col items-center justify-center gap-5 lg:w-[385.837px] lg:h-[536.65px] xl:w-[25rem]">
-                        <img className='w-[15rem] h-52 object-cover object-top rounded-lg md:h-72 md:object-cover lg:hidden' src="/big/womanFace.webp" alt="" />
+                        <img className='w-[15rem] h-52 object-cover object-top rounded-lg md:h-72 md:object-cover lg:hidden' src="https://ik.imagekit.io/mkjyuczro/Big/womanFace.webp?updatedAt=1743412601969" alt="" />
                         <img className='hidden w-[10rem] object-cover object-center lg:block lg:w-[20rem] lg:h-[26rem] lg:object-cover lg:rounded-xl xl:w-96' src='https://ik.imagekit.io/mkjyuczro/Big/womanFace.webp?updatedAt=1743412601969' alt="" />
                         <button onClick={() => navigate("/shop", { state: { type: "face" } })} className='w-40 p-1 rounded-xl border-2 border-black text-5xl font-semibold tracking-tighter md:text-3xl lg:text-4xl lg:w-60'>Face</button>
                     </div>
