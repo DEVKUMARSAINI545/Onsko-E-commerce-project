@@ -1,9 +1,12 @@
 import React, { useEffect, useState, useCallback } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import axiosInstance from '../../axios'
+import Swal from 'sweetalert2'
 export default function Header({ userProfileImage }) {
     const [changeX, setchangeX] = useState(false)
     const navigate = useNavigate()
+    const {email} = JSON.parse(localStorage.getItem("UserData"))
     const handleCart = () => {
  
         const token = localStorage.getItem("token")
@@ -15,6 +18,80 @@ export default function Header({ userProfileImage }) {
             navigate("/login")
         }
     }
+    const removeAccount = async () => {
+        try {
+            const response = await axiosInstance.post("/logout");
+    
+            if (response.status === 200 && response.data?.success) {
+                // Clear local storage
+                localStorage.removeItem('UserData');
+                
+                // Show success message
+                await Swal.fire({
+                    icon: 'success',
+                    title: 'Logged Out',
+                    text: 'You have been successfully logged out.',
+                    timer: 2000,
+                    showConfirmButton: false
+                });
+                
+                // Redirect to home
+                navigate("/login");
+                return;
+            }
+    
+            // Handle API success=false cases
+            throw new Error(response.data?.message || "Logout operation failed");
+    
+        } catch (error) {
+            let errorTitle = "Error";
+            let errorMessage = "An unexpected error occurred. Please try again.";
+            let icon = 'error';
+    
+            if (error.response) {
+                // Server responded with error status
+                switch (error.response.status) {
+                    case 401:
+                        errorTitle = "Session Expired";
+                        errorMessage = "Your session has expired. Please login again.";
+                        icon = 'warning';
+                        break;
+                    case 403:
+                        errorTitle = "Access Denied";
+                        errorMessage = "You don't have permission to perform this action.";
+                        break;
+                    case 500:
+                        errorTitle = "Server Error";
+                        errorMessage = "Our servers are experiencing issues. Please try again later.";
+                        break;
+                    default:
+                        errorMessage = error.response.data?.message || 
+                                      `Request failed with status code ${error.response.status}`;
+                }
+            } else if (error.request) {
+                // No response received
+                errorTitle = "Network Error";
+                errorMessage = "Unable to connect to the server. Please check your internet connection.";
+            }
+    
+            console.error("Logout error:", error);
+    
+            // Show error alert
+            await Swal.fire({
+                icon,
+                title: errorTitle,
+                text: errorMessage,
+                confirmButtonColor: '#3085d6',
+            });
+    
+            // Force logout if authentication error
+            if (error.response?.status === 401 || error.response?.status === 403) {
+                localStorage.removeItem('token');
+                localStorage.removeItem('tokenExpiration');
+                navigate("/login");
+            }
+        }
+    };
  
     return (
         <nav className="relative cursor-pointer lg:hidden w-[90%]   mx-auto h-10 flex items-center justify-between px-3 rounded-3xl bg-white  lg:mt-8">
@@ -44,7 +121,7 @@ export default function Header({ userProfileImage }) {
                         <li>About</li>
                         <li onClick={() => handleCart()}>Wishlist </li>
                         <li><Link to="/blog">Blog</Link></li>
-                        <li><Link to="/login">Log</Link></li>
+                       {!email ?<li><Link to="/login">Log</Link></li>:<li onClick={removeAccount}>Logout</li>}
                     </ul>
                 </div>
             </div>
