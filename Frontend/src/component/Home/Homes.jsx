@@ -44,7 +44,7 @@ export default function Homes() {
             getUser(email)
           } 
  
-    }, [state]);
+    }, []);
 
 
 
