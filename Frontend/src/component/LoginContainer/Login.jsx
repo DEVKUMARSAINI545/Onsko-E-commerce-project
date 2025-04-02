@@ -56,7 +56,7 @@ export default function Login() {
                   timer: 2000,
                   showConfirmButton: false,
               });
-              navigate('/',{state:{id:data?.userexist?._id,email:data?.userexist?.email}});
+              navigate('/',{state:{id:data?.userexist?._id,email:data?.userexist?.email,name:data?.userexist?.fullname,profileImage:data?.userexist?.profileImage}});
           } else {
               Swal.fire({
                   icon: 'error',

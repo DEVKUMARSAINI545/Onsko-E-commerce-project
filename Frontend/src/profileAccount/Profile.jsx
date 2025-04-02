@@ -1,18 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
+ 
 import Swal from 'sweetalert2';
 import axios from 'axios'
 import axiosInstance from '../axios';
 export default function Profile() {
     const navigate = useNavigate()
-    const location = useLocation();
-    // const {userProfileImage} = location.state?.value; // Safely access the state value
-    const {userProfileImage,Userdetail} = location.state?.value
-    console.log(Userdetail);
-    
-    // console.log(userProfileImage);
-    // const UserData = JSON.parse(localStorage.getItem("UserData"))
+    const {email,name,profileImage} = JSON.parse(localStorage.getItem("UserData"))
    
     
     
@@ -96,9 +90,9 @@ export default function Profile() {
             <div>
                 <div className="div w-full h-60 flex flex-col items-center gap-2 ">
 
-                    <img className='mx-auto object-cover mb-2 w-32 h-32 rounded-full' src={""} alt="" />
-                    <h1 className='text-center text-xl font-semibold'>{""}</h1>
-                    <p className='text-center text-xs tracking-tighter font-medium'>{""}</p>
+                    <img className='mx-auto object-cover mb-2 w-32 h-32 rounded-full' src={profileImage} alt="" />
+                    <h1 className='text-center text-xl font-semibold'>{email}</h1>
+                    <p className='text-center text-xs tracking-tighter font-medium'>{name}</p>
                     <button
                         onClick={removeAccount}
 
