@@ -6,7 +6,8 @@ import Swal from 'sweetalert2'
 export default function Header({ userProfileImage }) {
     const [changeX, setchangeX] = useState(false)
     const navigate = useNavigate()
-    const {email} = JSON.parse(localStorage.getItem("UserData"))
+    const userData = JSON.parse(localStorage.getItem("UserData")) || {}; 
+    const { email } = userData;
     const handleCart = () => {
  
         const token = localStorage.getItem("token")
