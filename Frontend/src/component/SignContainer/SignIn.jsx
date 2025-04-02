@@ -164,10 +164,11 @@ export default function SignIn() {
                 icon: "success",
                 title: "Account Created!",
                 text: data.message || "You have successfully signed up. Redirecting to login...",
-                timer: 2000,
+                timer: 100,
                 showConfirmButton: false,
             });
-            setTimeout(() => navigate("/login"), 1000);
+            navigate("/login")
+             
         } else {
             throw new Error(data.message || "Signup failed");
         }
