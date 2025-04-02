@@ -36,14 +36,15 @@ export default function Homes() {
         if (state) {
             localStorage.setItem("UserData", JSON.stringify(state));
           } 
+          else{
+            navigate("/login")
+          }
           const userData =  localStorage.getItem("UserData")
           if (userData) {
             const { email } = JSON.parse(userData);
     
             getUser(email)
-          } else{
-            navigate("/login")
-          }
+          } 
  
     }, [state]);
 
