@@ -206,8 +206,9 @@ export default function Login() {
        
                 </p>
                 <p className="mt-6 text-xs text-gray-600 text-center">
-                You dont have an account ? <span className=' cursor-pointer underline font-semibold' onClick={()=>navigate("/sign")}>please sign Up</span> 
-       
+                  <span className=' cursor-pointer underline font-semibold' onClick={()=>navigate("/sign")}>
+                    Forgot Password
+                  </span>
                 </p>
               </div>
             </div>

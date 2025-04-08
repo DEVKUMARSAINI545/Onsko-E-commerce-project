@@ -21,6 +21,7 @@ import PaymentPage from './Stripe/PaymentPage.jsx';
 import SignIn from './component/SignContainer/SignIn.jsx';
 import Login from './component/LoginContainer/Login.jsx';
 import AddBlogs from './component/BlogPanel/AddBlog.jsx';
+import Forgot from './component/ForgotPassword/Forgot.jsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -39,6 +40,7 @@ const router = createBrowserRouter(
       <Route path='/panel/dashboard' element={<DashBoard />} />
       <Route path='/subscription' element={<PriceSection />} />
       <Route path='/voice' element={<Voice />} />
+      <Route path='/forgot-password' element={<Forgot />} />
       <Route path='/paymentsuccess' element={<PaymentPage />} />
 
 
