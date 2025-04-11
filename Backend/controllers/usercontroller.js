@@ -12,6 +12,7 @@ import Order from '../models/Order.models.js'
 import Stripe from 'stripe';
 import Review from '../models/Review.models.js'
 import mongoose from 'mongoose'
+import sendEmail from '../utils/sendEmail.js'
  
 const stripe = new Stripe('sk_test_51QGeC3GCVUDiMIBN5AePLZ76YUKbhPKGWmCiMPK0D8xTFHEWjrsycYf3cBMTiV2QkS7wKAoieKLQMSVBdFCYBQJK00APfT1b3R'); // Secret Key
 
@@ -562,6 +563,7 @@ const paypalpayment = async (req, res) => {
             products,
         });
         await newPayment.save(); // Save to MongoDB
+ 
         res.json(session);
 
 
@@ -765,7 +767,40 @@ const getreview = async (req, res) => {
       });
     }
   };
+
+
+
+  const resendMessageToEmail = async(req,res)=>{
+    
+        try {
+            const { orderId } = req.body;
+        
+            const order = await Order.findByIdAndUpdate(
+              orderId,
+              { status: 'confirmed' },
+              { new: true }
+            ).populate('user');
+        
+            if (!order) return res.status(404).json({ message: 'Order not found' });
+        
+            await sendEmail({
+              to: order.user.email,
+              subject: 'Order Confirmed!',
+              html: `
+                <h1>Thanks for your order</h1>
+                <p>Your order ID is <strong>${order._id}</strong>.</p>
+                <p>Total: <strong>$${order.totalAmount}</strong></p>
+              `,
+            });
+        
+            res.status(200).json({ message: 'Order confirmed and email sent', order });
+          } catch (err) {
+            console.error(err);
+            res.status(500).json({ message: 'Something went wrong' });
+          }
+  
+  }
   
 
 
-export { login, logout,getreview, uploadReview, signin, paypalpayment,Searchproduct, verifyPayment, updateProductRating, removeallcart, getuser, productStore, createCart, removecart, blogspost, getproducts, getblogs, getAllProducts, getProductById, getcategory, getcart, admin }
+export { login, logout,getreview, uploadReview, signin, paypalpayment,Searchproduct, verifyPayment, updateProductRating, removeallcart, getuser, productStore, createCart, removecart, blogspost, getproducts, getblogs, getAllProducts, getProductById, getcategory, getcart, admin ,resendMessageToEmail}

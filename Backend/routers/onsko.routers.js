@@ -1,6 +1,6 @@
 import express from 'express'
 const  router = express.Router()
-import { login, signin, productStore, blogspost, uploadReview, verifyPayment, paypalpayment, updateProductRating, removeallcart, getproducts, getuser, removecart, createCart, getAllProducts, getcart, getProductById, getblogs, getcategory, admin, logout,getreview, Searchproduct } from '../controllers/usercontroller.js'
+import { login, signin, productStore, blogspost, uploadReview, verifyPayment, paypalpayment, updateProductRating, removeallcart, getproducts, getuser, removecart, createCart, getAllProducts, getcart, getProductById, getblogs, getcategory, admin, logout,getreview, Searchproduct,resendMessageToEmail } from '../controllers/usercontroller.js'
 import upload from '../utils/multer.js'
 
 import validationAdmin from '../middlewares/isAdmin.js'
@@ -19,10 +19,11 @@ router.route("/removeallcart").post(validationAdmin, removeallcart)
 router.route("/updaterating/:id").post(updateProductRating)
 router.route("/uploadReview/:id").post(validationAdmin,uploadReview)
 router.route("/removecart/:id").post(validationAdmin, removecart)
-router.route("/findproduct").get(validationAdmin, Searchproduct)
+router.route("/sendEmail").post(validationAdmin, resendMessageToEmail)
 
 
 //get request start from here
+router.route("/findproduct").get(validationAdmin, Searchproduct)
 router.route("/getUserReview/:id").get(validationAdmin,getreview)
 router.route("/getproducts/:type").get(validationAdmin,getproducts)
 router.route("/getAllproducts").get(validationAdmin,getAllProducts)
