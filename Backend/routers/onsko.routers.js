@@ -19,7 +19,7 @@ router.route("/removeallcart").post(validationAdmin, removeallcart)
 router.route("/updaterating/:id").post(updateProductRating)
 router.route("/uploadReview/:id").post(validationAdmin,uploadReview)
 router.route("/removecart/:id").post(validationAdmin, removecart)
-router.route("/findproduct").post(validationAdmin, Searchproduct)
+router.route("/findproduct").get(validationAdmin, Searchproduct)
 
 
 //get request start from here

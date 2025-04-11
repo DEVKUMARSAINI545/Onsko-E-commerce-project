@@ -716,22 +716,55 @@ const getreview = async (req, res) => {
   };
 
 
-  const Searchproduct = async(req,res)=>{
+  const Searchproduct = async (req, res) => {
     try {
-        const ProductItems = req.query.search
-        console.log(ProductItems);
-        
-        const product = await Product.find({name:{$regex:ProductItems,$options:"i"}})
-        if(!product)
-        {
-            return res.json({message:"product not found"})
-        }
-        res.json({data:product,success:true})
+      const searchQuery = req.query.search;
+  
+      // Check if searchQuery exists
+      if (!searchQuery || searchQuery.trim() === "") {
+        return res.status(400).json({
+          success: false,
+          message: "Search query is required.",
+        });
+      }
+  
+      // Optional: Allow only alphanumeric + space queries
+      const isValidQuery = /^[a-zA-Z0-9 ]+$/.test(searchQuery);
+      if (!isValidQuery) {
+        return res.status(400).json({
+          success: false,
+          message: "Invalid search query. Only letters, numbers, and spaces are allowed.",
+        });
+      }
+  
+      // Perform case-insensitive search
+      const products = await Product.find({
+        name: { $regex: searchQuery, $options: "i" },
+      });
+  
+      // No matching products
+      if (!products || products.length === 0) {
+        return res.status(404).json({
+          success: false,
+          message: "No matching products found.",
+        });
+      }
+  
+      // Return matched products
+      res.status(200).json({
+        success: true,
+        message: "Products fetched successfully.",
+        data: products,
+      });
+  
     } catch (error) {
-        console.log(error.message)
-        res.json({message:"Something went wrong",success:false})
+      console.error("Search error:", error.message);
+      res.status(500).json({
+        success: false,
+        message: "Internal server error. Please try again later.",
+      });
     }
-  }
+  };
   
 
 

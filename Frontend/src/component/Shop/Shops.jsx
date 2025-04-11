@@ -105,25 +105,37 @@ export default function Shops() {
         }
     }
 
-    useEffect(() => {
-        const fetchProducts = async () => {
-          if (productSearch) {
-            try {
-              const response = await axiosInstance.post(`/findproduct?search=${productSearch}`);
-              console.log(response.data);
-              setloading(false)
-              setproduct(response.data?.data)
+ 
+    
+ useEffect(()=>{
+     const fetchProducts = async () => {
+     try {
+             setloading(true);
+             
+             if (productSearch?.trim()) {
+                 const response = await axiosInstance.get(`/findproduct?search=${productSearch}`);
+                 
+                 if (response.data.success) {
+                     setproduct(response.data?.data);
+                    } else {
+                        console.warn("No products found:", response.data.message);
+                        setproduct([]); // or show a "no result" message in UI
+                    }
+                } else {
+                    // No search term: get all products
+                    await getAllproducts();
+                }
             } catch (error) {
-              console.error("Error fetching product:", error);
+                console.error("Error fetching product:", error.message);
+                setproduct([]);
+            } finally {
+                setloading(false);
             }
-          }
-          else{
-            getAllproducts()
-          }
-        };
+        }
+        fetchProducts()
+    },[productSearch])
       
-        fetchProducts();
-      }, [productSearch]);
+       
    
     return (
         <>
@@ -298,7 +310,7 @@ export default function Shops() {
     placeholder="Search..."
     className="w-80 h-full outline-none border-none text-sm px-2 bg-transparent bg-orange-300 rounded-md placeholder-black"
   />
-  {/* <button className="text-gray-600 hover:text-black">
+  <button  className="text-gray-600 hover:text-black">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
@@ -313,7 +325,7 @@ export default function Shops() {
         d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 103 10.5a7.5 7.5 0 0013.15 6.15z"
       />
     </svg>
-  </button> */}
+  </button>
 </div>
 
 
