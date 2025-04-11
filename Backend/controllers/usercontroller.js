@@ -12,6 +12,7 @@ import Order from '../models/Order.models.js'
 import Stripe from 'stripe';
 import Review from '../models/Review.models.js'
 import mongoose from 'mongoose'
+ 
 const stripe = new Stripe('sk_test_51QGeC3GCVUDiMIBN5AePLZ76YUKbhPKGWmCiMPK0D8xTFHEWjrsycYf3cBMTiV2QkS7wKAoieKLQMSVBdFCYBQJK00APfT1b3R'); // Secret Key
 
 const productStore = async (req, res) => {
@@ -713,7 +714,25 @@ const getreview = async (req, res) => {
       });
     }
   };
+
+
+  const Searchproduct = async(req,res)=>{
+    try {
+        const ProductItems = req.query.search
+        console.log(ProductItems);
+        
+        const product = await Product.find({name:{$regex:ProductItems,$options:"i"}})
+        if(!product)
+        {
+            return res.json({message:"product not found"})
+        }
+        res.json({data:product,success:true})
+    } catch (error) {
+        console.log(error.message)
+        res.json({message:"Something went wrong",success:false})
+    }
+  }
   
 
 
-export { login, logout,getreview, uploadReview, signin, paypalpayment, verifyPayment, updateProductRating, removeallcart, getuser, productStore, createCart, removecart, blogspost, getproducts, getblogs, getAllProducts, getProductById, getcategory, getcart, admin }
+export { login, logout,getreview, uploadReview, signin, paypalpayment,Searchproduct, verifyPayment, updateProductRating, removeallcart, getuser, productStore, createCart, removecart, blogspost, getproducts, getblogs, getAllProducts, getProductById, getcategory, getcart, admin }

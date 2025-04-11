@@ -15,7 +15,7 @@ export default function Shops() {
     const [changeX, setchangeX] = useState(false)
     const [showfilter, setshowfilter] = useState(false)
     const [loading,setloading] = useState(false)
-
+    const [productSearch,setproductSearch] = useState()
     const { name } = useParams(); // Access the route parameter
 
 
@@ -105,6 +105,25 @@ export default function Shops() {
         }
     }
 
+    useEffect(() => {
+        const fetchProducts = async () => {
+          if (productSearch) {
+            try {
+              const response = await axiosInstance.post(`/findproduct?search=${productSearch}`);
+              console.log(response.data);
+              setloading(false)
+              setproduct(response.data?.data)
+            } catch (error) {
+              console.error("Error fetching product:", error);
+            }
+          }
+          else{
+            getAllproducts()
+          }
+        };
+      
+        fetchProducts();
+      }, [productSearch]);
    
     return (
         <>
@@ -160,6 +179,14 @@ export default function Shops() {
                 <span className='text-md tracking-tighter opacity-[0.7]'> { products?.length } Products</span>
                 <span onClick={() => setshowfilter(prev => !prev)} className=' underline'>Filter</span>
             </div>
+            <div className="div md:hidden  w-full flex justify-center   my-5 h-8 ">
+                        <input
+    type="text"
+    onChange={(e)=>setproductSearch(e.target.value)}
+    placeholder="Search..."
+    className="w-80 h-full outline-none border-none text-sm px-2 bg-transparent bg-orange-300 rounded-md placeholder-black"
+  />
+                        </div>
 
             <div className="div w-full  md:hidden  h-auto flex flex-col  items-center gap-6">
                 {products?.length > 0 && products?.map((items, i) => {
@@ -198,6 +225,7 @@ export default function Shops() {
 
 
                     <div className="div w-full md:hidden pl-2  mt-4 h-auto ">
+                     
                         <ul className=' space-y-2  cursor-pointer  text-justify'>
                             <li onClick={() => getAllproducts()} className={`${isActiveIndex === null ? "" : "underline"}underline`}>All Products</li>
                             <li onClick={() => getProduct("body")} className={`${isActiveIndex === "body" ? "underline" : ""}`}>body care</li>
@@ -263,6 +291,31 @@ export default function Shops() {
 
                 {/* Right container start from here. */}
                 <div className="right  flex flex-wrap justify-between items-start py-8 px-5 lg:px-14 md:gap-y-10      w-[80%] xl:px-0 2xl:px-0 2xl:gap-5  gap-1   ">
+                <div className="w-full h-10 px-2 flex items-center">
+  <input
+    type="text"
+    onChange={(e)=>setproductSearch(e.target.value)}
+    placeholder="Search..."
+    className="w-80 h-full outline-none border-none text-sm px-2 bg-transparent bg-orange-300 rounded-md placeholder-black"
+  />
+  {/* <button className="text-gray-600 hover:text-black">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth={1.5}
+      stroke="currentColor"
+      className="w-5 h-5"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 103 10.5a7.5 7.5 0 0013.15 6.15z"
+      />
+    </svg>
+  </button> */}
+</div>
+
 
                 {loading && <div className="text-black text-5xl flex justify-center items-center w-full h-full"><img src="https://cdn-icons-png.flaticon.com/128/25/25220.png" alt="" /></div>}
 

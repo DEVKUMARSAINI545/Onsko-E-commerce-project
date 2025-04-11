@@ -1,6 +1,6 @@
 import express from 'express'
 const  router = express.Router()
-import { login, signin, productStore, blogspost, uploadReview, verifyPayment, paypalpayment, updateProductRating, removeallcart, getproducts, getuser, removecart, createCart, getAllProducts, getcart, getProductById, getblogs, getcategory, admin, logout,getreview } from '../controllers/usercontroller.js'
+import { login, signin, productStore, blogspost, uploadReview, verifyPayment, paypalpayment, updateProductRating, removeallcart, getproducts, getuser, removecart, createCart, getAllProducts, getcart, getProductById, getblogs, getcategory, admin, logout,getreview, Searchproduct } from '../controllers/usercontroller.js'
 import upload from '../utils/multer.js'
 
 import validationAdmin from '../middlewares/isAdmin.js'
@@ -19,6 +19,7 @@ router.route("/removeallcart").post(validationAdmin, removeallcart)
 router.route("/updaterating/:id").post(updateProductRating)
 router.route("/uploadReview/:id").post(validationAdmin,uploadReview)
 router.route("/removecart/:id").post(validationAdmin, removecart)
+router.route("/findproduct").post(validationAdmin, Searchproduct)
 
 
 //get request start from here

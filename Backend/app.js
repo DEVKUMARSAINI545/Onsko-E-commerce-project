@@ -33,7 +33,8 @@ app.use(cookieparser());
 // app.use(cors(corsOptions));
 
 
-const allowedOrigins = ["https://onsko-e-commerce-project.vercel.app"];
+// const allowedOrigins = ["https://onsko-e-commerce-project.vercel.app"];
+const allowedOrigins = ["http://localhost:5173"];
 
 // Enable CORS
 app.use(cors({
