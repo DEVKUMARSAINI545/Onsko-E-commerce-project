@@ -70,7 +70,6 @@ userSchema.methods.generateToken = async function () {
     const token = await jwt.sign(
         { id: this._id, email: this.email }, // Payload
         process.env.JWT_SECRET,
-        { expiresIn: '1d' } // Secret key
 
     );
     return token;
