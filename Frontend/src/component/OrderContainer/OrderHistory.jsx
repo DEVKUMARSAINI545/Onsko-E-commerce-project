@@ -8,8 +8,9 @@ const [products,getproducts]=useState([])
     const getOrderHistory = async()=>{
         try {
             const response = await axiosInstance.get("/getOrders")
+             console.log(response.data.order);
              
-            getproducts(response.data?.order)
+            // getproducts(response.data?.order)
             
         } catch (error) {
             
@@ -20,6 +21,8 @@ const [products,getproducts]=useState([])
     useEffect(()=>{
         getOrderHistory()
     },[])
+  
+    
   return (
     <>
         <div className="order-summary p-4">
@@ -44,7 +47,7 @@ const [products,getproducts]=useState([])
         <div>
           <p className="font-bold text-lg">{item?.product?.name}</p>
           <p>Quantity: {item?.quantity}</p>
-          <p>Price: ₹{item?.price}</p>
+          <p>Price: ₹{item?.products.price}</p>
         </div>
       </li>
           </>

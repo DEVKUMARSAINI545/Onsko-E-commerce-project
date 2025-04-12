@@ -644,7 +644,7 @@ const getOrders = async(req,res)=>{
     try {
      
     
-        const populatedOrder = await Order.find().populate("products.product").populate("userId")
+        const populatedOrder = await Order.find().populate("products.product")
     
         if (!populatedOrder) {
           return res.status(404).json({ message: "Order not found", success: false });
