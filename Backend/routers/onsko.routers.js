@@ -1,6 +1,6 @@
 import express from 'express'
 const  router = express.Router()
-import { login, signin, productStore, blogspost, uploadReview, verifyPayment, paypalpayment, updateProductRating, removeallcart, getproducts, getuser, removecart, createCart, getAllProducts, getcart, getProductById, getblogs, getcategory, admin, logout,getreview, Searchproduct,resendMessageToEmail } from '../controllers/usercontroller.js'
+import { login, signin, productStore, blogspost, uploadReview, verifyPayment,getOrder, paypalpayment, updateProductRating, removeallcart, getproducts, getuser, removecart, createCart, getAllProducts, getcart, getProductById, getblogs, getcategory, admin, logout,getreview, Searchproduct,resendMessageToEmail,getOrders } from '../controllers/usercontroller.js'
 import upload from '../utils/multer.js'
 
 import validationAdmin from '../middlewares/isAdmin.js'
@@ -19,11 +19,15 @@ router.route("/removeallcart").post(validationAdmin, removeallcart)
 router.route("/updaterating/:id").post(updateProductRating)
 router.route("/uploadReview/:id").post(validationAdmin,uploadReview)
 router.route("/removecart/:id").post(validationAdmin, removecart)
+router.route("/getOrder").post(validationAdmin,getOrder)
 router.route("/sendEmail").post(validationAdmin, resendMessageToEmail)
+router.route("/order").post(validationAdmin, verifyPayment)
+
 
 
 //get request start from here
 router.route("/findproduct").get(validationAdmin, Searchproduct)
+router.route("/getOrders").get(validationAdmin, getOrders)
 router.route("/getUserReview/:id").get(validationAdmin,getreview)
 router.route("/getproducts/:type").get(validationAdmin,getproducts)
 router.route("/getAllproducts").get(validationAdmin,getAllProducts)
@@ -35,7 +39,7 @@ router.route("/getcart").get(validationAdmin, getcart)
 
 router.route("/create-checkout-session").post(validationAdmin,paypalpayment);
 // router.route("/create/order").post(validationAdmin, paypalpayment);
-router.route("/payment-success").get(validationAdmin,verifyPayment);
+router.route("/payment-success").post(validationAdmin,verifyPayment);
 
 
 

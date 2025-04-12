@@ -104,7 +104,7 @@ export default function Profile() {
                 <div className="grid   p-8 mt-10 gap-4 w-full h-full
                 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
   
-  <div className="bg-gray-200 w-full sm:w-60 md:w-72 h-60 p-4 rounded shadow flex flex-col gap-5 items-center justify-center">
+  <div onClick={()=>navigate("/Orderhistory")} className="bg-gray-200 w-full sm:w-60 md:w-72 h-60 p-4 rounded shadow flex flex-col gap-5 items-center justify-center">
     <img src="https://cdn-icons-png.flaticon.com/128/5530/5530389.png" alt="Your Orders" />
     <h1>Your Orders History</h1>
   </div>
@@ -113,11 +113,7 @@ export default function Profile() {
     <img src="https://cdn-icons-png.flaticon.com/128/5735/5735325.png" alt="Your Wishlist" />
     <h1>Your Wishlist</h1>
   </div>
-
-  <div onClick={() => navigate("/subscription")} className="bg-gray-200 w-full sm:w-60 md:w-72 h-60 p-4 rounded shadow flex flex-col gap-5 items-center justify-center">
-    <img src="https://cdn-icons-png.flaticon.com/128/5836/5836060.png" alt="Your Subscription" />
-    <h1>Your Subscription</h1>
-  </div>
+ 
 
   <div onClick={() => navigate("/blogpost")} className="bg-gray-200 w-full sm:w-60 md:w-72 h-60 p-4 rounded shadow flex flex-col gap-5 items-center justify-center">
     <img src="https://cdn-icons-png.flaticon.com/128/3959/3959542.png" alt="Feedback" />

@@ -22,6 +22,9 @@ import SignIn from './component/SignContainer/SignIn.jsx';
 import Login from './component/LoginContainer/Login.jsx';
 import AddBlogs from './component/BlogPanel/AddBlog.jsx';
 import Forgot from './component/ForgotPassword/Forgot.jsx';
+import Order from './component/OrderContainer/Order.jsx';
+import OrderConfirm from './component/carts/OrderConfirm.jsx';
+import OrderHistory from './component/OrderContainer/OrderHistory.jsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -42,6 +45,9 @@ const router = createBrowserRouter(
       <Route path='/voice' element={<Voice />} />
       <Route path='/forgot-password' element={<Forgot />} />
       <Route path='/paymentsuccess' element={<PaymentPage />} />
+      <Route path='/order' element={<Order />} />
+      <Route path='/orderconfirm' element={<OrderConfirm />} />
+      <Route path='/Orderhistory' element={<OrderHistory />} />
 
 
 

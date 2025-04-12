@@ -196,7 +196,7 @@ export default function Shops() {
     type="text"
     onChange={(e)=>setproductSearch(e.target.value)}
     placeholder="Search..."
-    className="w-80 h-full outline-none border-none text-sm px-2 bg-transparent bg-orange-300 rounded-md placeholder-black"
+    className="w-80 h-full outline-none border-none text-sm px-2  bg-gray-600 text-white border-b-orange-500 rounded-md placeholder-black"
   />
                         </div>
 
@@ -303,12 +303,12 @@ export default function Shops() {
 
                 {/* Right container start from here. */}
                 <div className="right  flex flex-wrap justify-between items-start py-8 px-5 lg:px-14 md:gap-y-10      w-[80%] xl:px-0 2xl:px-0 2xl:gap-5  gap-1   ">
-                <div className="w-full h-10 px-2 flex items-center">
+                <div className="w-full h-10 px-2 flex items-center ">
   <input
     type="text"
     onChange={(e)=>setproductSearch(e.target.value)}
     placeholder="Search..."
-    className="w-80 h-full outline-none border-none text-sm px-2 bg-transparent bg-orange-300 rounded-md placeholder-black"
+    className="w-80 h-full outline-none border-none text-sm px-2 bg-gray-600 text-white border-b-orange-500  rounded-md placeholder-white"
   />
    
 </div>

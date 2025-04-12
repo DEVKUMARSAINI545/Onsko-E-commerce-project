@@ -550,7 +550,7 @@ const paypalpayment = async (req, res) => {
             payment_method_types: ['card', 'amazon_pay'],
             line_items: lineItems, // Pass in the line items for the session
             mode: 'payment', // You can also use 'subscription' if you are creating subscriptions
-            success_url: `http://localhost:5173/shop`, // Redirect after success
+            success_url: `http://localhost:5173/orderconfirm?session_id={CHECKOUT_SESSION_ID}`, // Redirect after success
             cancel_url: `http://localhost:5173/cart`, // Redirect after cancel
         });
         const newPayment = new paymentModel({
@@ -563,7 +563,7 @@ const paypalpayment = async (req, res) => {
             products,
         });
         await newPayment.save(); // Save to MongoDB
- 
+    
         res.json(session);
 
 
@@ -578,16 +578,39 @@ const verifyPayment = async (req, res) => {
 
     try {
         const session = await stripe.checkout.sessions.retrieve(req.query.session_id);
+            
         if (!session) return res.status(404).json({ error: "Session not found" });
 
-        // Update the payment record in MongoDB
-        const payment = await Payment.findOneAndUpdate(
-            { sessionId: session.id },
-            { paymentIntentId: session.payment_intent, paymentStatus: session.payment_status },
-            { new: true }
-        );
-
-        res.json({ message: "Payment successful!", payment });
+        const payment = await paymentModel.findOne({ sessionId: session.id });
+        
+      if (!payment) {
+        return res.status(404).json({ error: 'Payment not found' });
+      }
+  
+      payment.products.map((items)=>{
+        console.log("Here are the Items ::: "+items)
+      })
+      
+      const orderdata = await Order.create({
+        userId: payment.userId,  // User who made the payment
+        products: payment.products.map((item) => ({
+            product: item._id,
+            quantity: item.quantity,
+            price: item.price
+          })),
+        paymentIntentId: session.payment_intent,  // Stripe payment intent ID
+        totalAmount: payment.amount,  // Total paid amount
+        orderDate: new Date(),  // Order date
+        paymentStatus: 'Completed',  // Payment status
+        shippingDetails: {},  // Add shipping details as needed
+        paymentMethod:"PayPal",
+      })
+      await paymentModel.findOneAndUpdate(
+        { sessionId: session.id },
+        { paymentStatus: 'completed', orderId: orderdata._id },
+        { new: true }
+      );
+      return res.json({ success: true, order: orderdata._id });
     } catch (error) {
         console.error("Error fetching payment details:", error.message);
         res.status(500).send("Internal Server Error");
@@ -596,6 +619,44 @@ const verifyPayment = async (req, res) => {
 
 };
 
+const getOrder = async (req, res) => {
+    try {
+      const { orderId } = req.body;
+  
+      if (!orderId) {
+        return res.status(400).json({ message: "Order ID is required", success: false });
+      }
+  
+      const populatedOrder = await Order.findById(orderId).populate("products.product").populate("userId")
+  
+      if (!populatedOrder) {
+        return res.status(404).json({ message: "Order not found", success: false });
+      }
+  
+      res.json({ success: true, order: populatedOrder });
+    } catch (error) {
+      console.error("Error fetching order:", error.message);
+      res.status(500).json({ message: "Internal Server Error", success: false });
+    }
+  };
+
+const getOrders = async(req,res)=>{
+    try {
+     
+    
+        const populatedOrder = await Order.find().populate("products.product").populate("userId")
+    
+        if (!populatedOrder) {
+          return res.status(404).json({ message: "Order not found", success: false });
+        }
+    
+        res.json({ success: true, order: populatedOrder });
+      } catch (error) {
+        console.error("Error fetching order:", error.message);
+        res.status(500).json({ message: "Internal Server Error", success: false });
+      }
+}  
+  
 
 const updateProductRating = async (req, res) => {
     try {
@@ -803,4 +864,4 @@ const getreview = async (req, res) => {
   
 
 
-export { login, logout,getreview, uploadReview, signin, paypalpayment,Searchproduct, verifyPayment, updateProductRating, removeallcart, getuser, productStore, createCart, removecart, blogspost, getproducts, getblogs, getAllProducts, getProductById, getcategory, getcart, admin ,resendMessageToEmail}
+export { login,getOrders, logout,getreview,getOrder, uploadReview, signin, paypalpayment,Searchproduct, verifyPayment, updateProductRating, removeallcart, getuser, productStore, createCart, removecart, blogspost, getproducts, getblogs, getAllProducts, getProductById, getcategory, getcart, admin ,resendMessageToEmail}

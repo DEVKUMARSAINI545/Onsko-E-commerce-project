@@ -8,7 +8,7 @@ const shippingAddressSchema = new mongoose.Schema({
     country_code: { type: String, required: true },
 });
 const orderSchema = new mongoose.Schema({
-    user: {
+    userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true
@@ -27,7 +27,7 @@ const orderSchema = new mongoose.Schema({
         enum: ['Pending', 'Shipped', 'Delivered', 'Cancelled'],
         default: 'Pending'
     },
-    shippingAddress: shippingAddressSchema,
+    // shippingAddress: shippingAddressSchema,
     paymentMethod: {
         type: String,
         enum: ['Credit Card', 'PayPal', 'Bank Transfer'],

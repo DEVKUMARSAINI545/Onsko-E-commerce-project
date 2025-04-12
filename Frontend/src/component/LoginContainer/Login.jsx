@@ -150,38 +150,10 @@ export default function Login() {
  <div className="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
       <div className="max-w-screen-xl m-0 sm:m-10 bg-white shadow sm:rounded-lg flex justify-center flex-1">
         <div className="lg:w-1/2 xl:w-5/12 p-6 sm:p-12">
-          <div>
-            <img 
-              src="https://storage.googleapis.com/devitary-image-host.appspot.com/15846435184459982716-LogoMakr_7POjrN.png" 
-              alt="Logo" 
-              className="w-32 mx-auto" 
-            />
-          </div>
           <div className="mt-12 flex flex-col items-center">
-            <h1 className="text-2xl xl:text-3xl font-extrabold">Sign up</h1>
+            <h1 className="text-2xl xl:text-3xl font-extrabold">Sign In</h1>
             <div className="w-full flex-1 mt-8">
-              <div className="flex flex-col items-center">
-                <button className="w-full max-w-xs font-bold shadow-sm rounded-lg py-3 bg-indigo-100 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out hover:shadow focus:outline-none focus:shadow-sm">
-                  <div className="bg-white p-2 rounded-full">
-                    <img 
-                      src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Logo_2013_Google.png" 
-                      alt="Google" 
-                      className="w-4" 
-                    />
-                  </div>
-                  <span className="ml-4">Sign Up with Google</span>
-                </button>
-                <button className="w-full max-w-xs font-bold shadow-sm rounded-lg py-3 bg-indigo-100 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out hover:shadow focus:outline-none focus:shadow-sm mt-5">
-                  <div className="bg-white p-1 rounded-full">
-                    <img 
-                      src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" 
-                      alt="GitHub" 
-                      className="w-6" 
-                    />
-                  </div>
-                  <span className="ml-4">Sign Up with GitHub</span>
-                </button>
-              </div>
+             
               <div className="my-12 border-b text-center">
                 <div className="leading-none px-2 inline-block text-sm text-gray-600 tracking-wide font-medium bg-white transform translate-y-1/2">
                   Or sign up with e-mail
