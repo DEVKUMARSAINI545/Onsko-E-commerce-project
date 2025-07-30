@@ -1,0 +1,17 @@
+version: "3.8"
+services:
+  frontend:
+    image: devsaini255/ecommerce-frontend:latest
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_SERVER_URL=http://13.203.104.149:3000/api/v1/onsko
+    
+  backend:
+    build: ./Backend
+    ports:
+      - "3000:3000"
+    environment:
+      - MONGODB_URI=mongodb+srv://DevSaini:dev1256@cluster0.pugztbw.mongodb.net/onsko
+      - PORT=3000
+      - JWT_SECRET=devsaini1256@@devsaini1256
