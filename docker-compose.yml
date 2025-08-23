@@ -1,11 +1,11 @@
 version: "3.8"
 services:
   frontend:
-    image: devsaini255/ecommerce-frontend:latest
+    image: devsaini255/ecommercefrontend
     ports:
       - "5173:5173"
     environment:
-      - VITE_SERVER_URL=http://13.203.104.149:3000/api/v1/onsko
+      - VITE_SERVER_URL=http://65.0.29.158:3000/api/v1/onsko
     
   backend:
     build: ./Backend
